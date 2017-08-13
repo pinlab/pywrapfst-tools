@@ -34,9 +34,19 @@ i  = arc.ilabel
 o  = arc.olabel
 w  = arc.weight
 
-# iterating over arcs outgoing from a state:
-for arc in fst.num_arcs( <state> )
+# creating an arc to state q1
+arc = pywrapfst.Arc(isym, osym, pywrapfst.Weight.One(fst.weight_type()), q1))
+
+# adding an arc to state q0 in fst (which is Fst vector object)
+fst.add_arc(q0, arc)
+
+# iterating over arcs outgoing from state q0:
+for arc in fst.num_arcs( q0 )
     print arc.ilabel, arc.olabel, arc.nextstate
+    
+# sort arcs
+fst.arcsort(sort_type="ilabel")
+fst.arcsort(sort_type="olabel") 
 ```
 
 ### Symbols ###
@@ -59,5 +69,12 @@ fst.set_input_symbols(sym_tbl)
 fst.set_output_symbols(sym_tbl)
 ```
 
+### Operations ###
 
+```Python
+# composition
+pywrapfst.compose(fst1, fst2)
+
+# remove epsilons
+```
 
