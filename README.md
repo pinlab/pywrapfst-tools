@@ -75,6 +75,13 @@ fst.set_output_symbols(sym_tbl)
 # composition
 pywrapfst.compose(fst1, fst2)
 
+# merge symbl tables
+left_sym_tbl = str_fst.mutable_output_symbols()
+right_sym_tbl = self.fst.mutable_input_symbols()
+left_sym_tbl.add_table(right_sym_tbl)
+right_sym_tbl.add_table(left_sym_tbl)
+str_fst.relabel_tables(new_osymbols=self.fst.input_symbols())    
+
 # remove epsilons
 ```
 
